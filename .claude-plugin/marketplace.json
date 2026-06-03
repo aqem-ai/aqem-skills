@@ -9,7 +9,7 @@
       "name": "aqem",
       "source": "./",
       "description": "Generate perfect images (and soon video) with AQEM AI: model-aware text-to-image, image editing, and brand/product photoshoots, with credit-aware generation and auto-save to your AQEM Assets.",
-      "version": "0.1.1",
+      "version": "0.1.2",
       "author": {
         "name": "AQEM AI",
         "url": "https://aqemai.com"

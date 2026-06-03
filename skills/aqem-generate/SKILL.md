@@ -112,10 +112,23 @@ A mode decides how you turn the user's words into a strong prompt. Pick by inten
 Default `1:1`. Pick by destination: `16:9` cinematic/desktop/thumbnail, `9:16` phone/story/reel,
 `4:5` IG feed, `4:3`/`3:4` classic. Pass via `aspect_ratio` (string, e.g. `"16:9"`).
 
+## Editing an existing image (image-to-image)
+
+`generate_image` accepts an optional `image_url` (a public link to the source image).
+Use an edit-capable model: `p-image-edit` (best for edits/inpainting), `flux-kontext-fast`,
+`nano-banana-2`, or `gpt-image-2`.
+
+- **User gave a URL, or it's a previous AQEM generation** → pass it as `image_url` **silently**.
+  Don't ask — you already have the link. (Iterative editing "now make her smile / change the
+  background" just feeds the last result's URL back in.)
+- **User pasted/attached a LOCAL file with no URL** → you cannot read a pasted file's bytes, so the
+  tool can't receive it. Tell the user honestly and give the shortest path: *"Paste a link to the
+  image, or upload it at aqemai.com to get one, then I'll edit it."* Do not pretend to edit it.
+
 ## Pre-generation interview (only if needed)
 
 Skip anything obvious from context. At most 1–2 labeled questions:
-- **Editing an image but none supplied** → ask the user to share the image.
+- **Editing, only a local file, no URL** → ask for a link (see above).
 - **Chose gpt-image-2, no tier** → ask the quality question above.
 - **Ambiguous destination affecting ratio** → `[Square / Landscape 16:9 / Portrait 9:16]`.
 Otherwise: just generate with sensible defaults.
