@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AQEM AI Skills
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
@@ -67,3 +68,6 @@ The skills pick the right model automatically and ask before any expensive (12+ 
 ## License
 
 MIT — see [LICENSE](./LICENSE).
+=======
+# aqem-skills
+>>>>>>> 6c9b30bbad387ddcc0af199124cfadc9d668054d
