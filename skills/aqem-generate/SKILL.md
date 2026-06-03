@@ -1,5 +1,4 @@
 ---
-version: 0.1.0
 name: aqem-generate
 description: |
   Generate images (and soon video) with AQEM AI. Spends the signed-in AQEM
@@ -15,7 +14,6 @@ description: |
   Chain with aqem-photoshoot for branded product/marketing visuals.
   NOT for: account/billing/credit-topup actions, non-generation chat,
   marketplace listing copywriting, or training a face identity.
-argument-hint: "[prompt] [--model <id>] [--mode <name>] [--aspect <ratio>]"
 allowed-tools: mcp__aqem__generate_image, mcp__aqem__get_credit_balance
 ---
 

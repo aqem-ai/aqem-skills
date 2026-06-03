@@ -1,5 +1,4 @@
 ---
-version: 0.1.0
 name: aqem-photoshoot
 description: |
   Generate brand-quality product & marketing images with AQEM AI. The entry point
@@ -16,7 +15,6 @@ description: |
   conceptual_product, restyle. Credit-aware; saves results to AQEM Assets.
   NOT for: plain no-product text-to-image (use aqem-generate), account/billing,
   marketplace listing cards (use aqem-marketplace-cards), or video.
-argument-hint: "[--mode <mode>] [--count N] [--aspect <ratio>] [prompt]"
 allowed-tools: mcp__aqem__generate_image, mcp__aqem__get_credit_balance
 ---
 
