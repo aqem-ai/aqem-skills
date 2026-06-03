@@ -1,0 +1,27 @@
+{
+  "name": "aqem",
+  "owner": {
+    "name": "AQEM AI",
+    "url": "https://aqemai.com"
+  },
+  "plugins": [
+    {
+      "name": "aqem",
+      "source": "./",
+      "description": "Generate perfect images (and soon video) with AQEM AI: model-aware text-to-image, image editing, and brand/product photoshoots, with credit-aware generation and auto-save to your AQEM Assets.",
+      "version": "0.1.0",
+      "skills": [
+        {
+          "name": "generate",
+          "path": "aqem-generate",
+          "invoke": "/aqem:generate"
+        },
+        {
+          "name": "photoshoot",
+          "path": "aqem-photoshoot",
+          "invoke": "/aqem:photoshoot"
+        }
+      ]
+    }
+  ]
+}

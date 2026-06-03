@@ -1,0 +1,26 @@
+{
+  "name": "aqem",
+  "version": "0.1.0",
+  "description": "AQEM AI skills: generate perfect images across multiple models (Flux, Nano Banana, GPT Image), edit and restyle images, and produce brand-quality product & marketing photoshoots. Credit-aware and auto-saves to your AQEM Assets. Video generation coming soon.",
+  "author": {
+    "name": "AQEM AI",
+    "url": "https://aqemai.com"
+  },
+  "homepage": "https://aqemai.com",
+  "repository": "https://github.com/aqem-ai/aqem-skills",
+  "license": "MIT",
+  "keywords": [
+    "aqem",
+    "image-generation",
+    "ai-image",
+    "text-to-image",
+    "image-editing",
+    "img2img",
+    "product-photography",
+    "marketing-creative",
+    "ad-creative",
+    "flux",
+    "nano-banana",
+    "gpt-image"
+  ]
+}
