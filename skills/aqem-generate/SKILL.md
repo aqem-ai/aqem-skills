@@ -121,11 +121,21 @@ Use an edit-capable model: `p-image-edit` (best for edits/inpainting), `flux-kon
 - **User gave a URL, or it's a previous AQEM generation** → pass it as `image_url` **silently**.
   Don't ask — you already have the link. (Iterative editing "now make her smile / change the
   background" just feeds the last result's URL back in.)
-- **User pasted/attached a LOCAL file with no URL** → you cannot read a pasted file's bytes. Call the
-  **`upload_image`** tool: it shows a drop zone where the user uploads the file. When it's done, a
-  follow-up message gives you the real image URL — then call `generate_image` with that URL as
-  `image_url` and an edit-capable model. (If the drop zone doesn't appear, fall back to asking for a
-  public link.)
+- **User pasted/attached a LOCAL file with no URL** → get it to a URL using the FIRST path that's
+  available, in this order:
+
+  1. **Shell upload (seamless — preferred when you have it).** If you have a Bash/terminal tool AND can
+     resolve the attached file's local path, upload it directly — no drop zone, no extra step:
+     ```bash
+     curl -s -F "file=@/path/to/the/image.png" https://aqemai.com/api/upload
+     ```
+     The response is JSON: `{"success":true,"url":"https://pub-...r2.dev/...png"}`. Take that `url` and
+     immediately call `generate_image` with it as `image_url`. (This is the Higgsfield-style flow; it
+     works wherever Claude can run commands — e.g. Claude Code.)
+  2. **Drop-zone tool (no shell — e.g. Claude web).** If you can't run a shell, call **`upload_image`**:
+     it shows a drop zone. The user drops the file; a follow-up message returns the real URL; then call
+     `generate_image` with that URL as `image_url`.
+  3. **Last resort:** ask the user to paste a public image link.
 
 > ⚠️ **NEVER fabricate, guess, or construct an image URL** (e.g. an `image-proxy?path=...` link or any
 > made-up filename). Only ever pass an `image_url` that came from the user verbatim or from
