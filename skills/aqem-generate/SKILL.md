@@ -139,9 +139,11 @@ Then call `generate_image` with `image_url`, the chosen model (and `resolution: 
      works wherever Claude can run commands — e.g. Claude Code.)
      > Use `curl` for the upload. Do NOT base64-encode the file and call `save_upload` yourself — that
      > is slow and can hang for large images. (`save_upload` exists only for the drop-zone widget.)
-  2. **Drop-zone tool (no shell — e.g. Claude web).** If you can't run a shell, call **`upload_image`**:
-     it shows a drop zone. The user drops the file; a follow-up message returns the real URL; then call
-     `generate_image` with that URL as `image_url`.
+  2. **Drop-zone tool (no shell — e.g. Claude web).** If you can't run a shell, call **`upload_image`**
+     and pass `edit_instruction` = exactly what the user wants changed. The card handles the rest: the
+     user drops the file and taps a quality tier (High/Quality/Medium), and the card runs the edit
+     ITSELF and shows the result inline. **Do NOT call `generate_image` yourself afterwards** — the card
+     already did. (Only fall back to a manual `generate_image` call if the card asks you to.)
   3. **Last resort:** ask the user to paste a public image link.
 
 > ⚠️ **NEVER fabricate, guess, or construct an image URL** (e.g. an `image-proxy?path=...` link or any
