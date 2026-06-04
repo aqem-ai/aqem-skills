@@ -115,8 +115,13 @@ Default `1:1`. Pick by destination: `16:9` cinematic/desktop/thumbnail, `9:16` p
 ## Editing an existing image (image-to-image)
 
 `generate_image` accepts an optional `image_url` (a public link to the source image).
-Use an edit-capable model: `p-image-edit` (best for edits/inpainting), `flux-kontext-fast`,
-`nano-banana-2`, or `gpt-image-2`.
+
+**Edit quality — unless the user already chose, ASK which tier (state the credits):**
+- **High** — `google/nano-banana-pro` + `resolution: "2K"` (~25 credits) — best fidelity
+- **Quality** — `google/nano-banana-2` + `resolution: "2K"` (~17 credits) — great photoreal edits
+- **Medium** — `prunaai/p-image-edit` (~2 credits) — fast & cheap
+
+Then call `generate_image` with `image_url`, the chosen model (and `resolution: "2K"` for the nano tiers).
 
 - **User gave a URL, or it's a previous AQEM generation** → pass it as `image_url` **silently**.
   Don't ask — you already have the link. (Iterative editing "now make her smile / change the
@@ -132,6 +137,8 @@ Use an edit-capable model: `p-image-edit` (best for edits/inpainting), `flux-kon
      The response is JSON: `{"success":true,"url":"https://pub-...r2.dev/...png"}`. Take that `url` and
      immediately call `generate_image` with it as `image_url`. (This is the Higgsfield-style flow; it
      works wherever Claude can run commands — e.g. Claude Code.)
+     > Use `curl` for the upload. Do NOT base64-encode the file and call `save_upload` yourself — that
+     > is slow and can hang for large images. (`save_upload` exists only for the drop-zone widget.)
   2. **Drop-zone tool (no shell — e.g. Claude web).** If you can't run a shell, call **`upload_image`**:
      it shows a drop zone. The user drops the file; a follow-up message returns the real URL; then call
      `generate_image` with that URL as `image_url`.
