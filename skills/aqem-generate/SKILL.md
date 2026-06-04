@@ -121,9 +121,16 @@ Use an edit-capable model: `p-image-edit` (best for edits/inpainting), `flux-kon
 - **User gave a URL, or it's a previous AQEM generation** → pass it as `image_url` **silently**.
   Don't ask — you already have the link. (Iterative editing "now make her smile / change the
   background" just feeds the last result's URL back in.)
-- **User pasted/attached a LOCAL file with no URL** → you cannot read a pasted file's bytes, so the
-  tool can't receive it. Tell the user honestly and give the shortest path: *"Paste a link to the
-  image, or upload it at aqemai.com to get one, then I'll edit it."* Do not pretend to edit it.
+- **User pasted/attached a LOCAL file with no URL** → you cannot read a pasted file's bytes. Call the
+  **`upload_image`** tool: it shows a drop zone where the user uploads the file. When it's done, a
+  follow-up message gives you the real image URL — then call `generate_image` with that URL as
+  `image_url` and an edit-capable model. (If the drop zone doesn't appear, fall back to asking for a
+  public link.)
+
+> ⚠️ **NEVER fabricate, guess, or construct an image URL** (e.g. an `image-proxy?path=...` link or any
+> made-up filename). Only ever pass an `image_url` that came from the user verbatim or from
+> `save_upload`/`upload_image`. A made-up URL will 404 and the generation will fail. If you don't have a
+> real URL, use `upload_image` or ask for a link — do not invent one.
 
 ## Pre-generation interview (only if needed)
 
