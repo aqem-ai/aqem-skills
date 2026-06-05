@@ -1,6 +1,6 @@
 {
   "name": "aqem",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "AQEM AI skills: generate perfect images across multiple models (Flux, Nano Banana, GPT Image), edit and restyle images, and produce brand-quality product & marketing photoshoots. Credit-aware and auto-saves to your AQEM Assets. Video generation coming soon.",
   "author": {
     "name": "AQEM AI",

@@ -149,6 +149,22 @@ For on-image text always quote the exact words and route to `gpt-image-2`.
 `hero_banner` 16:9 · `social_carousel` 4:5 · `ad_creative_pack` 1:1 or 4:5 · `virtual_model_tryout` 3:4 ·
 `conceptual_product` 1:1 · `restyle` = source ratio. Override only if the user asks.
 
+## Getting local/attached images to a URL (IMPORTANT)
+
+`generate_image` needs PUBLIC image URLs — it cannot read a pasted/attached file. To bring in
+product/person photos:
+- **Already a public URL** (or a previous AQEM image) → use it directly as `image_url` / `image_urls`.
+- **Local/attached file with no URL** → call the **`upload_image`** tool. It shows a drop zone (accepts
+  up to 4 images to combine); the user drops them and a follow-up returns the real URL(s). Pass
+  `edit_instruction` (what to do), and ideally `model` (the model you'll use, e.g. `google/nano-banana-2`
+  for person+product) and `recommended` (the tier you suggest, e.g. `"Quality"` — the card badges it so
+  the user can one-tap your pick). Then call `generate_image` with the returned URL(s).
+  - **Do NOT** base64-encode files and call `save_upload` yourself, and **do NOT** `curl` unless you have
+    a shell AND outbound network — in Claude web/desktop those fail or hang. The drop zone is the reliable
+    path, and it lets the user pick the quality tier (with your recommendation highlighted).
+- **`closeup_with_person` / combining a person + a product** → upload BOTH via the drop zone (it returns
+  multiple URLs) and pass them as `image_urls` (order: subject/foreground first).
+
 ## Generation
 
 One `generate_image` call per image. For multi-output, loop and vary the prompt:
