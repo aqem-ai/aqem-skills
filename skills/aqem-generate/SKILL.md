@@ -123,6 +123,15 @@ Default `1:1`. Pick by destination: `16:9` cinematic/desktop/thumbnail, `9:16` p
 
 Then call `generate_image` with `image_url`, the chosen model (and `resolution: "2K"` for the nano tiers).
 
+### Combining multiple images (up to 4)
+To merge several images into ONE result, pass `image_urls` (array, max 4) instead of `image_url`:
+- Use for "put the product (img1) into this scene (img2)", "make this person wear this outfit", blends.
+- **Order matters** — list the **subject/foreground first**, then the scene/background.
+- Combine-capable models: `nano-banana-2`, `nano-banana-pro`, `gpt-image-2`, `p-image-edit` (same
+  High/Quality/Medium tiers). `flux-kontext-fast` uses only the first image; `flux-fast` ignores images —
+  so route combine asks to an edit-capable model. The `upload_image` drop zone accepts up to 4 files and
+  lists every URL back; pass them all as `image_urls`.
+
 - **User gave a URL, or it's a previous AQEM generation** → pass it as `image_url` **silently**.
   Don't ask — you already have the link. (Iterative editing "now make her smile / change the
   background" just feeds the last result's URL back in.)
